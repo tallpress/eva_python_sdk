@@ -60,14 +60,6 @@ evasdk.helpers module
    :undoc-members:
    :show-inheritance:
 
-evasdk.person module
---------------------
-
-.. automodule:: evasdk.person
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 evasdk.robot\_state module
 --------------------------
 
