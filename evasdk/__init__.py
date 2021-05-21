@@ -81,4 +81,3 @@ from .EvaDiscoverer import (
     DiscoverCallback, DiscoveredEva,
     find_evas, find_eva, find_first_eva, discover_evas,
 )
-from .person import Person
