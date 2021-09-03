@@ -1,0 +1,35 @@
+name: Build documentation
+on: [push, pull_request]
+  # push:
+  #   tags:
+  #     - 'v*.*.*'
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: pip install Sphinx ; pip install m2r2
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      # - name: Get incoming tags
+      #   run: echo "{GIT_TAG}={`echo $(git describe --tags --abbrev=0)`}" >> $GITHUB_ENV
+      - name: Create a new branch for docs
+        run: git checkout --orphan docs/v1.0.0
+      - name: Update the docs
+        run: cd docs ; make api_docs
+      - name: Setup git agent
+        run: |
+          git config --global user.email "docs@automata.tech"
+          git config --global user.name "docs-bot"
+      - name: Add everything
+        run: git commit -am 'docs'
+      - name: Push new branch up
+        run: git push origin docs/v1.0.0
+      # - name: Commit changes
+      #   uses: EndBug/add-and-commit@v7
+      #   with:
+      #     author_name: Tom Allpress
+      #     author_email: tom@automata.tech
+      #     message: 'documentation'
+      #     add: '*.rst'
+      #     push: true
